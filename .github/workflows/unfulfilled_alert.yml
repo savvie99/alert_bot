@@ -1,0 +1,28 @@
+name: Daily Unfulfilled Alert
+
+on:
+  schedule:
+    - cron: '0 7 * * *'  # 9AM CET (07:00 UTC)
+  workflow_dispatch:
+
+jobs:
+  alert-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run alert bot
+        env:
+          SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
+          SLACK_WEBHOOK_WILLIAM: ${{ secrets.SLACK_WEBHOOK_WILLIAM }}
+          SLACK_WEBHOOK_ZENVENTORY: ${{ secrets.SLACK_WEBHOOK_ZENVENTORY }}
+        run: python AlertBot.py
