@@ -81,9 +81,9 @@ for loc in locations:
     # --- STEP 3: Build message ---
     if all_orders:
         order_list = "\n".join([o["name"] for o in all_orders])
-        message = f"🚨 *Unfulfilled orders* (from {created_at_min[:10]} to {created_at_max[:10]}) for *{location_name}*:\n{order_list}"
+        message = f"🚨 *LUXMERY Unfulfilled orders* (from {created_at_min[:10]} to {created_at_max[:10]}) for *{location_name}*:\n{order_list}"
     else:
-        message = f"✅ No unfulfilled orders between {created_at_min[:10]} and {created_at_max[:10]} for *{location_name}*."
+        message = f"✅ No LUXMERY unfulfilled orders between {created_at_min[:10]} and {created_at_max[:10]} for *{location_name}*."
 
     # --- STEP 4: Send to Slack ---
     slack_url = LOCATION_SLACK_MAP.get(location_id)
