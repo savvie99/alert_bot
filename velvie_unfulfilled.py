@@ -10,7 +10,7 @@ API_VERSION = "2024-07"
 
 # Map Location ID to Slack webhook (fetched from ENV)
 LOCATION_SLACK_MAP = {
-    75143905548: os.getenv("SLACK_WEBHOOK_WILLIAM"), # william velvie location
+    75143905548: os.getenv("SLACK_WEBHOOK_WILLIAM") # william velvie location
 }
 
 headers = {
