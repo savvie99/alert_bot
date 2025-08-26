@@ -2,34 +2,38 @@ name: Daily Unfulfilled Alert
 
 on:
   schedule:
-    - cron: '0 7 * * *'  # 9AM CET (07:00 UTC)
+    - cron: '0 7 * * *'
   workflow_dispatch:
 
 jobs:
-  alert-job:
+  alert-bot:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4   # updated to v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
-      - name: Install dependencies
-        run: pip install requests
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.x' }
+      - run: pip install requests
       - name: Run Alert Bot
         env:
           SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
           SLACK_WEBHOOK_WILLIAM: ${{ secrets.SLACK_WEBHOOK_WILLIAM }}
           SLACK_WEBHOOK_ZENVENTORY: ${{ secrets.SLACK_WEBHOOK_ZENVENTORY }}
-        run: python AlertBot.py
+        run: |
+          set -euo pipefail
+          python AlertBot.py
 
+  velvie-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.x' }
+      - run: pip install requests
       - name: Run Velvie Unfulfilled Bot
         env:
           SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN_VELVIE }}
           SLACK_WEBHOOK_WILLIAM: ${{ secrets.SLACK_WEBHOOK_WILLIAM }}
           SLACK_WEBHOOK_ZENVENTORY: ${{ secrets.SLACK_WEBHOOK_ZENVENTORY }}
-        run: python velvie_unfulfilled.py
+        run: |
+          set -euo pipefail
+          python velvie_unfulfilled.py
