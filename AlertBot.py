@@ -1,6 +1,8 @@
+import os
 import requests
 import datetime
 import time
+from typing import Optional
 
 # --- CONFIGURATION --- 
 SHOPIFY_ACCESS_TOKEN = os.getenv("SHOPIFY_ACCESS_TOKEN") 
