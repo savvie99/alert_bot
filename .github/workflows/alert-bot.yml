@@ -30,4 +30,6 @@ jobs:
           SLACK_WEBHOOK_ZENVENTORY: ${{ secrets.SLACK_WEBHOOK_ZENVENTORY }}
         run: |
           set -euo pipefail
+          echo "Top of AlertBot.py:"
+          head -n 10 AlertBot.py
           python AlertBot.py
